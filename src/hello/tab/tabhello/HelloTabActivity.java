@@ -32,15 +32,14 @@ public class HelloTabActivity extends TabActivity {
         
         TabHost mTabHst = getTabHost();
         //,res.getDrawable(R.drawable.one)
-        
         mTabHst.setOnTabChangedListener(handler);
+
         
         
         mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed").setContent(i));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(i));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(i));
         mTabHst.setCurrentTab(0);
-
     }
     
     TabHost.OnTabChangeListener handler = new TabHost.OnTabChangeListener() {
@@ -48,13 +47,14 @@ public class HelloTabActivity extends TabActivity {
 		@Override
 		public void onTabChanged(String tabId) {
 			// TODO Auto-generated method stub
-			TextView myText = (TextView)findViewById(R.id.textView1);
-	        myText.setText(tabId);
-	        myText.setTextColor(Color.BLUE);
 	        
-			System.out.print(tabId);
+			//System.out.print(tabId);
 			if(tabId == "tab_test1")
 			{
+				String yo = null;
+				TextView myText = (TextView)findViewById(R.id.textView1);
+		        myText.setTextColor(Color.BLUE);
+		        myText.setText(yo);
 				Requester requester = new Requester();
 				AsyncTask<String, String, String> result = requester.execute("http://136.145.181.66/~esantos/SecurityService/controllers/GetAllNews.php","");
 				//JSONArray pageName;
@@ -73,22 +73,32 @@ public class HelloTabActivity extends TabActivity {
 						    String post_id5 = arr.getJSONObject(j).getString("ID");
 						    String post_id6 = arr.getJSONObject(j).getString("OID");
 						   
-							myText.setText(post_id0);
-							
+						    //myText.setText(post_id0);
+							post_id0 = post_id0+"\n";
+							myText.append(post_id0);
 						}
 					} catch (JSONException e) {
 						myText.setText("JSONException");
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						myText.setText("InterruptedException");
 						e.printStackTrace();
 					} catch (ExecutionException e) {
-						// TODO Auto-generated catch block
 						myText.setText("ExecutionException");
 						e.printStackTrace();
-					}			
+					}	
+			}
+			else if(tabId == "tab_test2")
+			{
+				TextView myTExt = (TextView)findViewById(R.id.textView1);
+		        myTExt.setTextColor(Color.BLUE);
+				myTExt.setText(tabId);
+			}
+			else if(tabId == "tab_test3")
+			{
+				TextView mYText = (TextView)findViewById(R.id.textView1);
+		        mYText.setTextColor(Color.BLUE);
+				mYText.setText(tabId);
 			}
 		}
 	};
