@@ -1,36 +1,23 @@
 package hello.tab.tabhello;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.concurrent.ExecutionException;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.string;
 import android.app.TabActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
 public class HelloTabActivity extends TabActivity {
@@ -44,12 +31,12 @@ public class HelloTabActivity extends TabActivity {
         Intent i = new Intent(this,Simple.class);
         
         TabHost mTabHst = getTabHost();
-        //,res.getDrawable(R.drawable.one)
+        //res.getDrawable(R.drawable.one);
         mTabHst.setOnTabChangedListener(handler);
 
         
         
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed").setContent(i));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed",res.getDrawable(R.drawable.three)).setContent(i));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(i));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(i));
         mTabHst.setCurrentTab(0);
@@ -61,8 +48,6 @@ public class HelloTabActivity extends TabActivity {
 		@Override
 		public void onTabChanged(String tabId) {
 			// TODO Auto-generated method stub
-	        
-			//System.out.print(tabId);
 			if(tabId == "tab_test1")
 			{
 		        try {
@@ -70,70 +55,65 @@ public class HelloTabActivity extends TabActivity {
 
 			        Requester requester = new Requester();
 					AsyncTask<String, String, String> result = requester.execute("http://136.145.181.66/~esantos/SecurityService/controllers/GetAllNews.php","");
-			        writeToFile(result.get());
-			        String S = readFromFile();
 			        
-						JSONObject obj;
+			        
+			        
+			        	JSONObject obj;
 						JSONArray arr;
 						try {
-							obj = new JSONObject(S);
+							obj = new JSONObject(result.get());
 							arr = obj.getJSONArray("News");
-							String [] anArray;
+							final String [] anArray;
+							final String [] anArrayf;
+							final String [] anArrayh;
+							final String [] anArrayd;
 							anArray = new String[arr.length()];
+							anArrayf = new String[arr.length()];
+							anArrayh = new String[arr.length()];
+							anArrayd = new String[arr.length()];
 							for (int j = 0; j < arr.length(); j++)
 							{
 							    String post_id0 = arr.getJSONObject(j).getString("Titulo");
-							    //String post_id1 = arr.getJSONObject(j).getString("Fecha");
-							    //String post_id2 = arr.getJSONObject(j).getString("Hora");
-							    //String post_id3 = arr.getJSONObject(j).getString("Autor");
-							    //String post_id4 = arr.getJSONObject(j).getString("Data");
-							    //String post_id5 = arr.getJSONObject(j).getString("ID");
-							    //String post_id6 = arr.getJSONObject(j).getString("OID");
+							    String post_id1 = arr.getJSONObject(j).getString("Fecha");
+							    String post_id2 = arr.getJSONObject(j).getString("Hora");
+							    String post_id4 = arr.getJSONObject(j).getString("Data");
 							   
 							    anArray[j] = post_id0;
+							    anArrayf[j] = post_id1;
+							    anArrayh[j] = post_id2;
+							    anArrayd[j] = post_id4;
+							    
 							}
 							myList = (ListView) findViewById(R.id.listView1);
 							myList.setAdapter(new ArrayAdapter<String>(HelloTabActivity.this,android.R.layout.simple_list_item_1, anArray));
 							myList.setClickable(true);
 							
-							//Helper.getListViewSize(myList);
 
-							
-							
-							myList.setOnItemClickListener(new OnItemClickListener() {
-						        public void onItemClick(AdapterView<?> parent, View view,
-						            int position, long id) {
-						          // When clicked, show a toast with the TextView text
-						if(position == 1)
-						{
-						//code specific to first list item    
-						         Intent myIntent = new Intent(view.getContext(), HelloTabActivity.class);
-						             startActivityForResult(myIntent, 0);
-						}
 
-						if(position == 2)
-						{
-						//code specific to 2nd list item    
-						         Intent myIntent = new Intent(view.getContext(), HelloTabActivity.class);
-						             startActivityForResult(myIntent, 0);
-						}
-						    }
-						  });
-							
-							
-							
+							 myList.setOnItemClickListener(new OnItemClickListener() {
+						            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						              Intent intent = null;
+
+						              int itemPosition     = position;
+
+						              intent = new Intent(getBaseContext(), news.class);
+						              String hola = anArray[itemPosition];
+									  intent.putExtra("titulo", hola);
+						              intent.putExtra("fecha", anArrayf[itemPosition]);
+						              intent.putExtra("hora",  anArrayh[itemPosition]);
+						              intent.putExtra("data", anArrayd[itemPosition]);
+									  startActivity(intent);
+						            }
+						          });				
 						} catch (JSONException e) {
 							e.printStackTrace();
-						//} catch (InterruptedException e) {
-						//	e.printStackTrace();
-						//} catch (ExecutionException e) {
-						//	e.printStackTrace();
 						}
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        }			}
 			else if(tabId == "tab_test2")
 			{
+				
 				
 				//TextView myTExt = (TextView)findViewById(R.id.textView1);
 		        //myTExt.setTextColor(Color.BLUE);
@@ -167,44 +147,4 @@ public class HelloTabActivity extends TabActivity {
 	    }
 	    return false;
 	}
-	private void writeToFile(String data) {
-	    try {
-	        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("config.txt", Context.MODE_PRIVATE));
-	        outputStreamWriter.write(data);
-	        outputStreamWriter.close();
-	    }
-	    catch (IOException e) {
-	        Log.e("Exception", "File write failed: " + e.toString());
-	    } 
-	}
-	private String readFromFile() {
-
-	    String ret = "";
-
-	    try {
-	        InputStream inputStream = openFileInput("config.txt");
-
-	        if ( inputStream != null ) {
-	            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-	            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-	            String receiveString = "";
-	            StringBuilder stringBuilder = new StringBuilder();
-
-	            while ( (receiveString = bufferedReader.readLine()) != null ) {
-	                stringBuilder.append(receiveString);
-	            }
-
-	            inputStream.close();
-	            ret = stringBuilder.toString();
-	        }
-	    }
-	    catch (FileNotFoundException e) {
-	        Log.e("login activity", "File not found: " + e.toString());
-	    } catch (IOException e) {
-	        Log.e("login activity", "Can not read file: " + e.toString());
-	    }
-
-	    return ret;
-	}
-	
 }
