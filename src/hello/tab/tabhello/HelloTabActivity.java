@@ -19,15 +19,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
 
+import com.parse.ParseAnalytics;
+
+
 @SuppressWarnings("deprecation")
 public class HelloTabActivity extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	
+    	
         super.onCreate(savedInstanceState);
-        
+       
         setContentView(R.layout.main);
         
+        
         Resources res = getResources();
+        ParseAnalytics.trackAppOpened(getIntent());
         Intent i = new Intent(this,Simple.class);
         
         TabHost mTabHst = getTabHost();
