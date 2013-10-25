@@ -19,8 +19,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
 
+import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
-
+import com.parse.ParseInstallation;
+import com.parse.ParseUser;
+import com.parse.PushService;
 
 @SuppressWarnings("deprecation")
 public class HelloTabActivity extends TabActivity {
@@ -30,11 +34,26 @@ public class HelloTabActivity extends TabActivity {
     	
         super.onCreate(savedInstanceState);
        
+        Parse.initialize(this, "ngO0pJwU3VcWyanB4b2brukGVf8uBEkBLjwQCzYS", "eiaA5xVpO9FukZJyfRbkw6k2oL93OfqJH8bmTCAi"); 
+        ParseAnalytics.trackAppOpened(getIntent());
+
+
+        ParseUser.enableAutomaticUser();
+		ParseACL defaultACL = new ParseACL();
+	    
+		// If you would like all objects to be private by default, remove this line.
+		defaultACL.setPublicReadAccess(true);
+		
+		ParseACL.setDefaultACL(defaultACL, true);
+
+		PushService.setDefaultPushCallback(this, HelloTabActivity.class);
+		ParseInstallation.getCurrentInstallation().saveInBackground();
+	
         setContentView(R.layout.main);
         
         
         Resources res = getResources();
-        ParseAnalytics.trackAppOpened(getIntent());
+       
         Intent i = new Intent(this,Simple.class);
         
         TabHost mTabHst = getTabHost();
