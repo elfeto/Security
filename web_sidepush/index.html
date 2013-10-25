@@ -1,0 +1,44 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>My Parse App</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+</head>
+
+<body>
+<p>input Notifcation</p>
+<input id="test" type="text">
+<button type="button" onclick="Sendnotification()">Click Me!</button>
+
+  <script type="text/javascript">
+    Parse.initialize("ngO0pJwU3VcWyanB4b2brukGVf8uBEkBLjwQCzYS", "VXTZJD6GRavwfRB2K1dfhCUYDSuujHszOYl438NN");
+    var query = new Parse.Query(Parse.Installation);
+ function Sendnotification(){
+ var x=document.getElementById("test").value;
+ if(x==""||isNaN(x)){
+	Parse.Push.send({
+	where: query, // Set our Installation query
+	data: {
+    alert: x
+	}
+	}, {
+  success: function() {
+    // Push was successful
+	alert("notification send");
+  },
+  error: function(error) {
+    // Handle error
+	alert("notification not send ")
+  }
+});
+}}
+  </script>
+</body>
+
+</html>
