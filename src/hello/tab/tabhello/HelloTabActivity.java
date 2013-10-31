@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -59,12 +60,25 @@ public class HelloTabActivity extends TabActivity {
         TabHost mTabHst = getTabHost();
         //res.getDrawable(R.drawable.one);
         mTabHst.setOnTabChangedListener(handler);
-
+        WebView webview;
+        webview = (WebView) findViewById(R.id.webView1);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Trolley.html");
+       
+        WebView webview2;
+        webview2 = (WebView) findViewById(R.id.webView2);
+        webview2.getSettings().setJavaScriptEnabled(true);
+        webview2.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Emergencia.html");
         
+        WebView webview3;
+        webview3 = (WebView) findViewById(R.id.webView3);
+        webview3.getSettings().setJavaScriptEnabled(true);
+        webview3.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Incidente.html");
         
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed",res.getDrawable(R.drawable.three)).setContent(i));
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(i));
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(i));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed",res.getDrawable(R.drawable.three)).setContent(R.id.listView1));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(R.id.webView1));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(R.id.webView2));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Incidentes").setContent(R.id.webView3)); 
         mTabHst.setCurrentTab(0);
 
     }
