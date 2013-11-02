@@ -1,11 +1,13 @@
 package hello.tab.tabhello;
 
-
-
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ActionBar;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -17,8 +19,10 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -29,12 +33,19 @@ import com.parse.PushService;
 
 @SuppressWarnings("deprecation")
 public class HelloTabActivity extends TabActivity {
-    @Override
+    
+    Button btnShowLocation;
+    
+    GPSTracker gps;
+	
+	@Override
     public void onCreate(Bundle savedInstanceState) {
-    	
-    	
         super.onCreate(savedInstanceState);
        
+        ActionBar ab = getActionBar();
+        ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        
+        postData();
         Parse.initialize(this, "ngO0pJwU3VcWyanB4b2brukGVf8uBEkBLjwQCzYS", "eiaA5xVpO9FukZJyfRbkw6k2oL93OfqJH8bmTCAi"); 
         ParseAnalytics.trackAppOpened(getIntent());
 
@@ -52,11 +63,10 @@ public class HelloTabActivity extends TabActivity {
 	
         setContentView(R.layout.main);
         
-        
         Resources res = getResources();
        
         Intent i = new Intent(this,Simple.class);
-        
+                
         TabHost mTabHst = getTabHost();
         //res.getDrawable(R.drawable.one);
         mTabHst.setOnTabChangedListener(handler);
@@ -75,12 +85,20 @@ public class HelloTabActivity extends TabActivity {
         webview3.getSettings().setJavaScriptEnabled(true);
         webview3.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Incidente.html");
         
+        WebView webview4;
+        webview4 = (WebView) findViewById(R.id.webView4);
+        webview4.getSettings().setJavaScriptEnabled(true);
+        webview4.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Telefono.html");        
+
         mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed",res.getDrawable(R.drawable.three)).setContent(R.id.listView1));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(R.id.webView1));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(R.id.webView2));
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Incidentes").setContent(R.id.webView3)); 
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test4").setIndicator("Incidentes").setContent(R.id.webView3)); 
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test5").setIndicator("Telefonos").setContent(R.id.webView4)); 
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test6").setIndicator("Reportar").setContent(i)); 
+        
         mTabHst.setCurrentTab(0);
-
+   
     }
     
     TabHost.OnTabChangeListener handler = new TabHost.OnTabChangeListener() {
@@ -95,9 +113,7 @@ public class HelloTabActivity extends TabActivity {
 
 			        Requester requester = new Requester();
 					AsyncTask<String, String, String> result = requester.execute("http://136.145.181.66/~esantos/SecurityService/controllers/GetAllNews.php","");
-			        
-			        
-			        
+			        			        
 			        	JSONObject obj;
 						JSONArray arr;
 						try {
@@ -186,5 +202,42 @@ public class HelloTabActivity extends TabActivity {
 	        return true;
 	    }
 	    return false;
+	}
+	
+	public void postData() {
+	    // Create a new HttpClient and Post Header
+	    HttpClient httpclient = new DefaultHttpClient();
+	    HttpPost httppost = new HttpPost("http://ada.uprrp.edu/~ftorres/Seguridad/GPS.html");
+	    double latitude = 0;
+	    double longitude = 0;
+	    btnShowLocation = (Button) findViewById(R.id.action_settings);
+				     
+		        gps = new GPSTracker(HelloTabActivity.this);
+ 		        if(gps.canGetLocation()){
+		             
+		            latitude = gps.getLatitude();
+		            longitude = gps.getLongitude();
+		             
+		            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();    
+		            JSONObject json = new JSONObject();
+		         JSONObject jsonlocation = new JSONObject();
+
+		         try {
+					 jsonlocation.put("lat", latitude);
+			         jsonlocation.put("lng", longitude);  //<< put lng
+			         json.put("location",jsonlocation);
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}  
+
+		        }else{
+		            gps.showSettingsAlert();
+		        }
+
+		//List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		//nameValuePairs.add(new BasicNameValuePair("longitude", String.valueOf(longitude)));
+		//nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(latitude)));
+		//httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	}
 }
