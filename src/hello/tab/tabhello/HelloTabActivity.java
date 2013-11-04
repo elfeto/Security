@@ -42,8 +42,8 @@ public class HelloTabActivity extends TabActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        
-        ActionBar ab = getActionBar();
-        ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        //ActionBar ab = getActionBar();
+        //ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         
         postData();
         Parse.initialize(this, "ngO0pJwU3VcWyanB4b2brukGVf8uBEkBLjwQCzYS", "eiaA5xVpO9FukZJyfRbkw6k2oL93OfqJH8bmTCAi"); 
