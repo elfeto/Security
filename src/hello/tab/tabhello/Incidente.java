@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
- 
-public class map  extends Activity{
+public class Incidente  extends Activity{
 
     // Google Map
     private GoogleMap googleMap;
@@ -16,11 +18,15 @@ public class map  extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.map);
  
         try {
             // Loading map
             initilizeMap();
+            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(18.404731,-66.047779));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+                googleMap.moveCamera(center);
+                googleMap.animateCamera(zoom);
  
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,19 +58,3 @@ public class map  extends Activity{
     }
  
 }
-
-
-/*
- * Para enviar al usuario a la pagina de settings para que ponga el GPS
- * LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-boolean enabled = service
-  .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-// check if enabled and if not send user to the GSP settings
-// Better solution would be to display a dialog and suggesting to 
-// go to the settings
-if (!enabled) {
-  Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-  startActivity(intent);
-}  
- */

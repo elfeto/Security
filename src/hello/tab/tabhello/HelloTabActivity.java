@@ -3,15 +3,12 @@ package hello.tab.tabhello;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.TabActivity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -27,15 +24,17 @@ import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.parse.PushService;
 
+
 @SuppressWarnings("deprecation")
 public class HelloTabActivity extends TabActivity {
     
     Button btnShowLocation;
-    
+
     GPSTracker gps;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		
         super.onCreate(savedInstanceState);
         
         postData();
@@ -56,40 +55,27 @@ public class HelloTabActivity extends TabActivity {
 	
         setContentView(R.layout.main);
         
-        Resources res = getResources();
+        //Resources res = getResources();
        
         Intent i = new Intent(this,Simple.class);
         
-        
-        Intent m = new Intent(this, map.class);   
+        Intent m = new Intent(this, Trolley.class);   
        
-        Intent n = new Intent(this, mapi.class);
+        Intent n = new Intent(this, Emergencia.class);
+
+        Intent b = new Intent(this, Incidente.class);
+
+        Intent v = new Intent(this, Telefono.class);
 
         
         TabHost mTabHst = getTabHost();
         mTabHst.setOnTabChangedListener(handler);
         
-        WebView webview;
-        webview = (WebView) findViewById(R.id.webView1);
-        webview.getSettings().setJavaScriptEnabled(true);
-        webview.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Trolley.html");
-      
-        
-        WebView webview3;
-        webview3 = (WebView) findViewById(R.id.webView3);
-        webview3.getSettings().setJavaScriptEnabled(true);
-        webview3.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Incidente.html");
-        
-        WebView webview4;
-        webview4 = (WebView) findViewById(R.id.webView4);
-        webview4.getSettings().setJavaScriptEnabled(true);
-        webview4.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Telefono.php");        
-
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed",res.getDrawable(R.drawable.three)).setContent(R.id.listView1));
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(n));
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(m));
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test4").setIndicator("Incidentes").setContent(R.id.webView3)); 
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test5").setIndicator("Telefonos").setContent(R.id.webView4)); 
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed").setContent(R.id.listView1));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(m));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(n));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test4").setIndicator("Incidentes").setContent(b)); 
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test5").setIndicator("Telefonos").setContent(v)); 
         mTabHst.addTab(mTabHst.newTabSpec("tab_test6").setIndicator("Reportar").setContent(i)); 
         
         mTabHst.setCurrentTab(0);

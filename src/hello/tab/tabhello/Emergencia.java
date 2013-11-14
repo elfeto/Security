@@ -4,21 +4,30 @@ package hello.tab.tabhello;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
-public class mapi extends Activity{
+public class Emergencia extends Activity{
 
     private GoogleMap googleMap;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.map);
  
         try {
             // Loading map
             initilizeMap();
+            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(18.404731,-66.047779));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+                googleMap.moveCamera(center);
+                googleMap.animateCamera(zoom);
+                
  
         } catch (Exception e) {
             e.printStackTrace();
