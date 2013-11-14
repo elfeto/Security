@@ -1,13 +1,9 @@
 package hello.tab.tabhello;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ActionBar;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -41,9 +37,6 @@ public class HelloTabActivity extends TabActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
-        //ActionBar ab = getActionBar();
-        //ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         
         postData();
         Parse.initialize(this, "ngO0pJwU3VcWyanB4b2brukGVf8uBEkBLjwQCzYS", "eiaA5xVpO9FukZJyfRbkw6k2oL93OfqJH8bmTCAi"); 
@@ -66,19 +59,21 @@ public class HelloTabActivity extends TabActivity {
         Resources res = getResources();
        
         Intent i = new Intent(this,Simple.class);
-                
+        
+        
+        Intent m = new Intent(this, map.class);   
+       
+        Intent n = new Intent(this, mapi.class);
+
+        
         TabHost mTabHst = getTabHost();
-        //res.getDrawable(R.drawable.one);
         mTabHst.setOnTabChangedListener(handler);
+        
         WebView webview;
         webview = (WebView) findViewById(R.id.webView1);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Trolley.html");
-       
-        WebView webview2;
-        webview2 = (WebView) findViewById(R.id.webView2);
-        webview2.getSettings().setJavaScriptEnabled(true);
-        webview2.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Emergencia.html");
+      
         
         WebView webview3;
         webview3 = (WebView) findViewById(R.id.webView3);
@@ -88,11 +83,11 @@ public class HelloTabActivity extends TabActivity {
         WebView webview4;
         webview4 = (WebView) findViewById(R.id.webView4);
         webview4.getSettings().setJavaScriptEnabled(true);
-        webview4.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Telefono.html");        
+        webview4.loadUrl("http://ada.uprrp.edu/~ftorres/Seguridad/Telefono.php");        
 
         mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed",res.getDrawable(R.drawable.three)).setContent(R.id.listView1));
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(R.id.webView1));
-        mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(R.id.webView2));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(n));
+        mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(m));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test4").setIndicator("Incidentes").setContent(R.id.webView3)); 
         mTabHst.addTab(mTabHst.newTabSpec("tab_test5").setIndicator("Telefonos").setContent(R.id.webView4)); 
         mTabHst.addTab(mTabHst.newTabSpec("tab_test6").setIndicator("Reportar").setContent(i)); 
@@ -166,23 +161,8 @@ public class HelloTabActivity extends TabActivity {
 						}
 		        } catch (Exception e) {
 		            e.printStackTrace();
-		        }			}
-			else if(tabId == "tab_test2")
-			{
-				
-				
-				//TextView myTExt = (TextView)findViewById(R.id.textView1);
-		        //myTExt.setTextColor(Color.BLUE);
-				//myTExt.setText(tabId);
-		        
-				
-			}
-			else if(tabId == "tab_test3")
-			{
-				//TextView mYText = (TextView)findViewById(R.id.textView1);
-		        //mYText.setTextColor(Color.BLUE);
-				//mYText.setText(tabId);
-			}
+		        }
+		    }
 		}
 	};
 	/* Checks if external storage is available for read and write */
@@ -204,10 +184,9 @@ public class HelloTabActivity extends TabActivity {
 	    return false;
 	}
 	
+	
 	public void postData() {
 	    // Create a new HttpClient and Post Header
-	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://ada.uprrp.edu/~ftorres/Seguridad/GPS.html");
 	    double latitude = 0;
 	    double longitude = 0;
 	    btnShowLocation = (Button) findViewById(R.id.action_settings);
@@ -224,7 +203,7 @@ public class HelloTabActivity extends TabActivity {
 
 		         try {
 					 jsonlocation.put("lat", latitude);
-			         jsonlocation.put("lng", longitude);  //<< put lng
+			         jsonlocation.put("lng", longitude);
 			         json.put("location",jsonlocation);
 
 				} catch (JSONException e) {
@@ -234,10 +213,5 @@ public class HelloTabActivity extends TabActivity {
 		        }else{
 		            gps.showSettingsAlert();
 		        }
-
-		//List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-		//nameValuePairs.add(new BasicNameValuePair("longitude", String.valueOf(longitude)));
-		//nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(latitude)));
-		//httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	}
 }

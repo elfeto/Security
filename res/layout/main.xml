@@ -18,35 +18,42 @@
             android:id="@android:id/tabs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"/>
+            android:textAlignment="center">
+        </TabWidget>    
         </HorizontalScrollView>
         <FrameLayout
             android:id="@android:id/tabcontent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
 			android:maxLines="10"
     		android:singleLine="false">
             <ListView
             	android:id="@+id/listView1"
              	android:textColor="#000"
             	android:layout_width="match_parent"
-           		android:layout_height="wrap_content" />
+           		android:layout_height="wrap_content">
+            </ListView>
             <WebView
                 android:id="@+id/webView1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <WebView
-                android:id="@+id/webView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+            </WebView>
+    		<fragment
+        		android:id="@+id/map"
+        		android:name="com.google.android.gms.maps.MapFragment"
+        		android:layout_width="match_parent"
+        		android:layout_height="match_parent">
+        	</fragment>
             <WebView
                 android:id="@+id/webView3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+            </WebView>
             <WebView
                 android:id="@+id/webView4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+            </WebView>
             </FrameLayout>
     </LinearLayout>
 </TabHost>
