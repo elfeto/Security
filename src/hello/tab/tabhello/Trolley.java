@@ -28,6 +28,8 @@ public class Trolley  extends Activity{
             CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
                 googleMap.moveCamera(center);
                 googleMap.animateCamera(zoom);
+                //39.749962,-104.991538
+                googleMap.setMyLocationEnabled(true);
  
         } catch (Exception e) {
             e.printStackTrace();

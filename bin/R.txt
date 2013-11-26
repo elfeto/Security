@@ -59,16 +59,16 @@ int drawable icon 0x7f02001c
 int drawable splash 0x7f02001d
 int id LinLay 0x7f050005
 int id action_settings 0x7f050011
-int id expandableListView1 0x7f050010
+int id button1 0x7f05000e
+int id editText1 0x7f05000d
 int id hybrid 0x7f050004
 int id linearLayout2 0x7f050009
-int id linearLayout4 0x7f05000d
 int id listView1 0x7f050007
 int id map 0x7f050008
 int id none 0x7f050000
 int id normal 0x7f050001
 int id satellite 0x7f050002
-int id scrollView1 0x7f05000e
+int id spinner1 0x7f050010
 int id telefono 0x7f05000f
 int id terrain 0x7f050003
 int id textView1 0x7f050006
@@ -112,6 +112,9 @@ int string common_signin_button_text 0x7f060011
 int string common_signin_button_text_long 0x7f060012
 int string hello 0x7f060019
 int string hello_world 0x7f06001d
+int string incidente 0x7f06001f
+int string reportar 0x7f060020
+int string selectMarker 0x7f06001e
 int string title_activity_parse_application 0x7f06001b
 int[] styleable MapAttrs { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d }
 int styleable MapAttrs_cameraBearing 1

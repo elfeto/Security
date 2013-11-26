@@ -70,7 +70,6 @@ public class HelloTabActivity extends TabActivity {
         
         TabHost mTabHst = getTabHost();
         mTabHst.setOnTabChangedListener(handler);
-        
         mTabHst.addTab(mTabHst.newTabSpec("tab_test1").setIndicator("News feed").setContent(R.id.listView1));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test2").setIndicator("Trolley").setContent(m));
         mTabHst.addTab(mTabHst.newTabSpec("tab_test3").setIndicator("Emergencias").setContent(n));
