@@ -41,11 +41,11 @@ public class Telefono  extends Activity{
  
             CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(18.404731,-66.047779));
             CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
-                googleMap.moveCamera(center);
-                googleMap.animateCamera(zoom);
+            googleMap.moveCamera(center);
+            googleMap.animateCamera(zoom);
  
                 Requester requester = new Requester();
-				AsyncTask<String, String, String> result = requester.execute("http://136.145.181.66/Security/GetAllNews.php","");
+				AsyncTask<String, String, String> result = requester.execute("http://136.145.181.66/Security/Markers/GetAllMarkers.php","");
 	        	JSONObject obj;
 				JSONArray arr;
 				

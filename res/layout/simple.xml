@@ -4,19 +4,69 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="5dip" >
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reportar un incidente de manera anonima"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="Reportar un incidente de manera anonima\n"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:layout_height="wrap_content"
+            android:text="Titulo:   " />
+        <EditText
+        	android:id="@+id/editText2"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:background="#ffff"
+        	android:ems="10"
+        	android:inputType="text" >
+        <requestFocus />
+    </EditText>
+    </TableRow>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:layout_height="wrap_content"
+        android:text="\nDescription:" />
     <EditText
         android:id="@+id/editText1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:background="#ffff"
         android:ems="10"
-        android:inputType="textMultiLine" >
-    </EditText>
+        
+        android:inputType="textMultiLine" />
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        
+        android:text="\n" 
+        android:textAppearance="?android:attr/textAppearanceMedium" />         
+        <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        
+        android:text="Facultad: " 
+        android:textAppearance="?android:attr/textAppearanceMedium" /> 
+        <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </TableRow>
     <Button
         android:id="@+id/button1"
         style="?android:attr/buttonStyleSmall"

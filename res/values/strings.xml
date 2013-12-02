@@ -12,4 +12,5 @@
     <string name="selectMarker">Select Type</string>
     <string name="incidente">Reportar un incidente</string>
 	<string name="reportar"> Submit</string>
+	<color name="white">#ffffff</color>
 </resources>

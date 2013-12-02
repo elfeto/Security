@@ -1,21 +1,27 @@
 package hello.tab.tabhello;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+
 public class Emergencia extends Activity{
 
+    Button btnShowLocation;
+    GPSTracker gps;
     private GoogleMap googleMap;
  
     @Override
@@ -35,8 +41,8 @@ public class Emergencia extends Activity{
             CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
                 googleMap.moveCamera(center);
                 googleMap.animateCamera(zoom);
-                //39.749962,-104.991538
                 googleMap.setMyLocationEnabled(true);
+                googleMap.getUiSettings().setMyLocationButtonEnabled(true);
  
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,10 +72,34 @@ public class Emergencia extends Activity{
         super.onResume();
         initilizeMap();
     }
+	public void postData() {
+	    // Create a new HttpClient and Post Header
+	    double latitude = 0;
+	    double longitude = 0;
+	    btnShowLocation = (Button) findViewById(R.id.action_settings);
+				     
+		        gps = new GPSTracker(Emergencia.this);
+ 		        if(gps.canGetLocation()){
+		             
+		            latitude = gps.getLatitude();
+		            longitude = gps.getLongitude();
+		             
+		            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();    
+		            JSONObject json = new JSONObject();
+		         JSONObject jsonlocation = new JSONObject();
+
+		         try {
+					 jsonlocation.put("lat", latitude);
+			         jsonlocation.put("lng", longitude);
+			         json.put("location",jsonlocation);
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}  
+
+		        }else{
+		            gps.showSettingsAlert();
+		        }
+	}
  
 }
-
-
-
- 
-

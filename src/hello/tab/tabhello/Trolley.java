@@ -44,7 +44,6 @@ public class Trolley  extends Activity{
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().findFragmentById(
                     R.id.map)).getMap();
- 
             // check if map is created successfully or not
             if (googleMap == null) {
                 Toast.makeText(getApplicationContext(),
@@ -53,13 +52,11 @@ public class Trolley  extends Activity{
             }
         }
     }
- 
     @Override
     protected void onResume() {
         super.onResume();
         initilizeMap();
     }
- 
 }
 
 

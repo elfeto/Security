@@ -12,11 +12,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.Toast;
-
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
@@ -27,17 +24,12 @@ import com.parse.PushService;
 
 @SuppressWarnings("deprecation")
 public class HelloTabActivity extends TabActivity {
-    
-    Button btnShowLocation;
-
-    GPSTracker gps;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		
         super.onCreate(savedInstanceState);
         
-        postData();
         Parse.initialize(this, "ngO0pJwU3VcWyanB4b2brukGVf8uBEkBLjwQCzYS", "eiaA5xVpO9FukZJyfRbkw6k2oL93OfqJH8bmTCAi"); 
         ParseAnalytics.trackAppOpened(getIntent());
 
@@ -90,10 +82,8 @@ public class HelloTabActivity extends TabActivity {
 			{
 		        try {
 					ListView myList = (ListView)findViewById(R.id.listView1);
-
 			        Requester requester = new Requester();
-					AsyncTask<String, String, String> result = requester.execute("http://136.145.181.66/~esantos/SecurityService/controllers/GetAllNews.php","");
-			        			        
+					AsyncTask<String, String, String> result = requester.execute("http://136.145.181.66/Security/News/GetAllNews.php","");
 			        	JSONObject obj;
 						JSONArray arr;
 						try {
@@ -118,13 +108,10 @@ public class HelloTabActivity extends TabActivity {
 							    anArrayf[j] = post_id1;
 							    anArrayh[j] = post_id2;
 							    anArrayd[j] = post_id4;
-							    
 							}
 							myList = (ListView) findViewById(R.id.listView1);
 							myList.setAdapter(new ArrayAdapter<String>(HelloTabActivity.this,android.R.layout.simple_list_item_1, anArray));
 							myList.setClickable(true);
-							
-
 
 							 myList.setOnItemClickListener(new OnItemClickListener() {
 						            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -167,36 +154,5 @@ public class HelloTabActivity extends TabActivity {
 	        return true;
 	    }
 	    return false;
-	}
-	
-	
-	public void postData() {
-	    // Create a new HttpClient and Post Header
-	    double latitude = 0;
-	    double longitude = 0;
-	    btnShowLocation = (Button) findViewById(R.id.action_settings);
-				     
-		        gps = new GPSTracker(HelloTabActivity.this);
- 		        if(gps.canGetLocation()){
-		             
-		            latitude = gps.getLatitude();
-		            longitude = gps.getLongitude();
-		             
-		            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();    
-		            JSONObject json = new JSONObject();
-		         JSONObject jsonlocation = new JSONObject();
-
-		         try {
-					 jsonlocation.put("lat", latitude);
-			         jsonlocation.put("lng", longitude);
-			         json.put("location",jsonlocation);
-
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}  
-
-		        }else{
-		            gps.showSettingsAlert();
-		        }
 	}
 }
