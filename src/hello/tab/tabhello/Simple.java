@@ -29,9 +29,8 @@ import android.provider.Settings.Secure;
 public class Simple extends Activity {
     Spinner spinner1;
     GPSTracker gps;
-    double latitude = 0;
-    double longitude = 0;
-
+    String lat = null;
+    String lng = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,8 +62,10 @@ public class Simple extends Activity {
         gps = new GPSTracker(Simple.this);
 	        if(gps.canGetLocation()){
              
-            latitude = gps.getLatitude();
-            longitude = gps.getLongitude();
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+        	lat = Double.toString(latitude);
+        	lng = Double.toString(longitude);
 	        }        
         
           Button  rtn = (Button)findViewById(R.id.button1);
@@ -77,7 +78,8 @@ public class Simple extends Activity {
                     public void onClick(View view)
                     {
                     	
-                    	
+
+
                    	 	String Faculty = String.valueOf(spinner1.getSelectedItem());
 
                         String value = edit_text.getText().toString();
@@ -97,6 +99,9 @@ public class Simple extends Activity {
                                     parameters.add(new BasicNameValuePair("ID",android_id));
                                     parameters.add(new BasicNameValuePair("Date",formattedDateString));
                                     parameters.add(new BasicNameValuePair("Faculty",Faculty));
+                                    parameters.add(new BasicNameValuePair("latitude",lat));
+                                    parameters.add(new BasicNameValuePair("longitude",lng));
+                                    
 
                           DefaultHttpClient httpClient = new DefaultHttpClient();
 
