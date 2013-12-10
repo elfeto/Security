@@ -41,10 +41,13 @@ public class HelloTabActivity extends TabActivity {
 		defaultACL.setPublicReadAccess(true);
 		
 		ParseACL.setDefaultACL(defaultACL, true);
+		if(sharedPrefs.getBoolean("Notifications", true)){
+			PushService.unsubscribe(this, "Security");
+			ParseInstallation.getCurrentInstallation().saveInBackground();
+		
+		}
 
-		PushService.setDefaultPushCallback(this, HelloTabActivity.class);
-		ParseInstallation.getCurrentInstallation().saveInBackground();
-	
+		
         setContentView(R.layout.main);
         
         //Resources res = getResources();
@@ -72,6 +75,24 @@ public class HelloTabActivity extends TabActivity {
         mTabHst.setCurrentTab(0);
    
     }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	super.onCreateOptionsMenu(menu);
+	MenuInflater inflater = getMenuInflater();
+	inflater.inflate(R.menu.parse_application, menu);
+	return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	switch (item.getItemId()) {
+	case R.id.settings:
+	startActivity(new Intent(this, Prefs.class));
+	return true;
+	// More items go here (if any) ...
+	}
+	return false;
+	}
+
     
     TabHost.OnTabChangeListener handler = new TabHost.OnTabChangeListener() {
 		
