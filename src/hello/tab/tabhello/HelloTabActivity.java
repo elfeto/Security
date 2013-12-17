@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
+
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
@@ -84,6 +85,7 @@ public class HelloTabActivity extends TabActivity {
 					ListView myList = (ListView)findViewById(R.id.listView1);
 			        Requester requester = new Requester();
 					AsyncTask<String, String, String> result = requester.execute("http://136.145.181.66/Security/News/GetAllNews.php","");
+
 			        	JSONObject obj;
 						JSONArray arr;
 						try {

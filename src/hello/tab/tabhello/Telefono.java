@@ -1,5 +1,9 @@
 package hello.tab.tabhello;
 
+import hello.tab.tabhello.R;
+import hello.tab.tabhello.R.id;
+import hello.tab.tabhello.R.layout;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
