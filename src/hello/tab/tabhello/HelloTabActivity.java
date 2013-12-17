@@ -3,20 +3,25 @@ package hello.tab.tabhello;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.content.res.Resources;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
-import com.parse.Parse;
+
 import com.parse.ParseACL;
-import com.parse.ParseAnalytics;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.parse.PushService;
@@ -30,8 +35,8 @@ public class HelloTabActivity extends TabActivity {
 		
         super.onCreate(savedInstanceState);
         
-        Parse.initialize(this, "ngO0pJwU3VcWyanB4b2brukGVf8uBEkBLjwQCzYS", "eiaA5xVpO9FukZJyfRbkw6k2oL93OfqJH8bmTCAi"); 
-        ParseAnalytics.trackAppOpened(getIntent());
+      
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
 
         ParseUser.enableAutomaticUser();
@@ -41,13 +46,14 @@ public class HelloTabActivity extends TabActivity {
 		defaultACL.setPublicReadAccess(true);
 		
 		ParseACL.setDefaultACL(defaultACL, true);
+
 		if(sharedPrefs.getBoolean("Notifications", true)){
 			PushService.unsubscribe(this, "Security");
 			ParseInstallation.getCurrentInstallation().saveInBackground();
 		
 		}
 
-		
+	
         setContentView(R.layout.main);
         
         //Resources res = getResources();
@@ -92,7 +98,6 @@ public class HelloTabActivity extends TabActivity {
 	}
 	return false;
 	}
-
     
     TabHost.OnTabChangeListener handler = new TabHost.OnTabChangeListener() {
 		

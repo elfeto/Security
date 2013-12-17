@@ -13,4 +13,21 @@
     <string name="incidente">Reportar un incidente</string>
 	<string name="reportar"> Submit</string>
 	<color name="white">#ffffff</color>
+	<string name="title_activity_preference">PreferenceActivity</string>
+    <string name="pref_sync">PreferenceActivity</string>
+    <string name="pref_sync_summ">PreferenceActivity</string>
+    <string name="title_activity_prefs">Prefs</string>
+    <string name="settings_label">Settings...</string>
+    <string name="settings_title">Sudoku settings</string>
+    <string name="settings_shortcut">s</string>
+    <string name="n_title">Notificactions</string>
+    <string name="n_summary">Turn off/on notificactions</string>
+    <string name="text_title">Text messges </string>
+    <string name="text_summary">Able to recive text messeges</string>
+    <string name="Email_title">Email </string>
+    <string name="Email_summary">Able to recive email</string>
+    <string name="email">Email </string>
+    <string name="number">Phone Number</string>
+    <string name="title_activity_dialog">Dialog</string>
+    <string name="title_activity_tester">Tester</string>
 </resources>

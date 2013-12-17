@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+xmlns:android="http://schemas.android.com/apk/res/android" >
+<CheckBoxPreference
+android:key="Notifications"
+android:title="@string/n_title"
+android:summary="@string/n_summary"
+android:defaultValue="true" />
+<CheckBoxPreference
+android:key="Text"
+android:title="@string/text_title"
+android:summary="@string/text_summary"
+android:defaultValue="false" />
+<EditTextPreference
+android:key="Phone"
+android:title="@string/number" 
+android:summary="Insert cellphone number"
+android:dialogTitle="Cell Phone"
+android:dialogMessage="Insert Number"	
+android:defaultValue="" 
+android:dependency="Text"/>
+<CheckBoxPreference
+android:key="Email"
+android:title="@string/Email_title"
+android:summary="@string/Email_summary"
+android:defaultValue="false" />
+<EditTextPreference
+android:key="Emailaccount"
+android:title="@string/email" 
+android:summary="Email to send emails"
+android:dialogTitle="Email"
+android:dialogMessage="Email"	
+android:defaultValue="" 
+android:dependency="Email"/>
+
+
+
+
+</PreferenceScreen>
