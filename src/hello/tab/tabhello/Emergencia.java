@@ -71,7 +71,9 @@ public class Emergencia extends Activity{
         } 
         gps = new GPSTracker(Emergencia.this);
 		if(gps.canGetLocation()){
-		 
+		
+            Toast.makeText(getApplicationContext(), "Usted no esta en un estacionamiento, No se puede calcular su ruta.", Toast.LENGTH_LONG).show();
+
 		latitude = gps.getLatitude();
 		longitude = gps.getLongitude();
 		}
@@ -121,9 +123,7 @@ public class Emergencia extends Activity{
 
 	                while ((line = reader.readLine()) != null) {
 	                    builder.append(line + "\n");
-	                    
 	                }
-	                Toast.makeText(getApplicationContext(), (CharSequence) builder, Toast.LENGTH_LONG).show();
 	                is.close();
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block

@@ -190,7 +190,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinLay=0x7f050005;
-        public static final int action_settings=0x7f050016;
+        public static final int action_settings=0x7f050017;
         public static final int button1=0x7f050013;
         public static final int editText1=0x7f05000f;
         public static final int editText2=0x7f05000e;
@@ -212,6 +212,7 @@ containing a value of this type.
         public static final int textView3=0x7f05000b;
         public static final int textView4=0x7f05000c;
         public static final int textView5=0x7f050011;
+        public static final int trolley=0x7f050016;
     }
     public static final class layout {
         public static final int bk=0x7f030000;
@@ -221,6 +222,7 @@ containing a value of this type.
         public static final int simple=0x7f030004;
         public static final int splash_screen=0x7f030005;
         public static final int telefono=0x7f030006;
+        public static final int trolley=0x7f030007;
     }
     public static final class menu {
         public static final int parse_application=0x7f080000;

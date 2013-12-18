@@ -1,7 +1,12 @@
 package hello.tab.tabhello;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -19,7 +24,7 @@ public class Trolley  extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.map);
+        setContentView(R.layout.trolley);
  
         try {
             // Loading map
@@ -30,7 +35,17 @@ public class Trolley  extends Activity{
                 googleMap.animateCamera(zoom);
                 //39.749962,-104.991538
                 googleMap.setMyLocationEnabled(true);
- 
+                ((Button)findViewById(R.id.button1)).setOnClickListener(new OnClickListener() {
+                	  @Override
+                	  public void onClick(View v) {
+                		  Intent callIntent = new Intent(Intent.ACTION_CALL);
+                		    callIntent.setData(Uri.parse("tel:7874127660"));
+                		    startActivity(callIntent);
+                	  }
+                	});
+
+                
+                
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,7 +58,7 @@ public class Trolley  extends Activity{
     private void initilizeMap() {
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-                    R.id.map)).getMap();
+                    R.id.trolley)).getMap();
             // check if map is created successfully or not
             if (googleMap == null) {
                 Toast.makeText(getApplicationContext(),

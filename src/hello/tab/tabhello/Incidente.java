@@ -79,6 +79,15 @@ public class Incidente  extends Activity{
                 Toast.makeText(getApplicationContext(),
                         "Sorry! unable to create maps", Toast.LENGTH_SHORT)
                         .show();
+                googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+                        R.id.map)).getMap();
+            }
+            if (googleMap == null) {
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! unable to create maps", Toast.LENGTH_SHORT)
+                        .show();
+                googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+                        R.id.map)).getMap();
             }
         }
     }

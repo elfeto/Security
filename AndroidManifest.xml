@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="19"/>
-
+ 	<uses-permission android:name="android.permission.CALL_PHONE"/>   
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -20,85 +20,57 @@
         android:required="true" />
         
         
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/icon"
-        android:label="@string/app_name" >
-        <activity
-            android:name="hello.tab.tabhello.HelloTabActivity"
-            android:label="@string/app_name" >
+    <application android:allowBackup="true" android:icon="@drawable/icon" android:label="@string/app_name" >
+        
+        <activity android:name="hello.tab.tabhello.HelloTabActivity" android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="hello.tab.tabhello.news"
-            android:label="@string/app_name" >
+        
+        
+        <activity android:name="hello.tab.tabhello.news" android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.news" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="hello.tab.tabhello.Trolley"
-            android:label="@string/app_name" >
+        
+        <activity android:name="hello.tab.tabhello.Trolley" android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.map" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="hello.tab.tabhello.Emergencia"
-            android:label="@string/app_name" >
+        <activity android:name="hello.tab.tabhello.Emergencia" android:label="@string/app_name" >
         </activity>
-                <activity
-            android:name="com.example.esparra.Telefono"
-            android:label="@string/app_name" >
+        <activity android:name="com.example.esparra.Telefono" android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.mapi" />
-
+                <action android:name="android.intent.action.map" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-                <activity
-            android:name="hello.tab.tabhello.Incidente"
-            android:label="@string/app_name" >
+        
+        
+                <activity android:name="hello.tab.tabhello.Incidente" android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.mapi" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreen" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN">
-                <category android:name="android.intent.category.LAUNCHER">
-            </category></action></intent-filter>
-        </activity>
-        <activity
-            android:name="hello.tab.tabhello.Simple"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="hello.tab.tabhello.ParseApplication"
-            android:label="@string/title_activity_parse_application" >
-        </activity>
+        <activity android:name="hello.tab.tabhello.Simple" android:label="@string/app_name"/>
+        <activity android:name="hello.tab.tabhello.ParseApplication" android:label="@string/title_activity_parse_application" />
         <service android:name="com.parse.PushService" />
         <receiver android:name="com.parse.ParseBroadcastReceiver">
-                          <intent-filter>
-                                   <action android:name="android.intent.action.BOOT_COMPLETED" />
-                            <action android:name="android.intent.action.USER_PRESENT" />
-                          </intent-filter>
-                </receiver>
-    <meta-data
-    	android:name="com.google.android.maps.v2.API_KEY"
-    	android:value="AIzaSyBM9357SOt0ntbBXBv0yKR_DMzT7NE1hXQ">
+         	<intent-filter>
+        	<action android:name="android.intent.action.BOOT_COMPLETED" />
+        	<action android:name="android.intent.action.USER_PRESENT" />
+     		</intent-filter>
+		</receiver>
+    <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBM9357SOt0ntbBXBv0yKR_DMzT7NE1hXQ">
     </meta-data>
-
     </application>
 </manifest>
 
